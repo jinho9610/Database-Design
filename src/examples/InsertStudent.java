@@ -45,13 +45,9 @@ public class InsertStudent extends HttpServlet {
 		String Major = request.getParameter("major");
 		int Grade = Integer.parseInt(request.getParameter("grade"));
 		String SecondMajor = request.getParameter("secondMajor");
-		
 		String AdmissionDate = request.getParameter("admissionDate");
-
 		String Email = request.getParameter("email");
-
 	
-		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -72,15 +68,13 @@ public class InsertStudent extends HttpServlet {
 			
 			// 4. SQL 쿼리 작성
 			pstmt.setInt(1, StudentNumber);
-			StringReader reader = new StringReader(Name);
-			pstmt.setCharacterStream(2, reader, Name.length());
+			pstmt.setString(2, Name);
 			pstmt.setString(3, Major);
 			pstmt.setInt(4, Grade);
 			pstmt.setString(5, SecondMajor);
 			pstmt.setString(6, AdmissionDate);
-			StringReader reader2 = new StringReader(Email);
-			//pstmt.setCharacterStream(7, reader2, Email.length());
 			pstmt.setString(7, Email);
+			
 			int count = pstmt.executeUpdate();
 			System.out.println("데");
 			// 5. 쿼리 수행

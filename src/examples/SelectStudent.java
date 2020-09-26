@@ -37,7 +37,7 @@ public class SelectStudent extends HttpServlet {
 		System.out.println("StudentSelect doGet() 호출!");
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		out.println("<h1> Hello World!!!</h1>");
+		out.println("<h1> Result of    \"select * from student\"   !!!</h1>");
 		
 		Connection conn = null;
 		Statement stmt = null;
@@ -47,22 +47,16 @@ public class SelectStudent extends HttpServlet {
 		{
 			// 1. 드라이버 로딩
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			
 			// 2. 연결하기
 			String url = "jdbc:mysql://localhost/db_design";
-			
 			conn = DriverManager.getConnection(url, "12161719", "p12161719");
 			System.out.println("연결 성공!!~");
-			
 			// 3. Query 수행을 위한 Statement 객체 생성
 			stmt = conn.createStatement();
-			
 			// 4. SQL 쿼리 작성
 			String sql = "SELECT StudentNumber, Name, Major, Grade, SecondMajor, AdmissionDate, Email FROM student";
-			
 			// 5. 쿼리 수행
 			rs = stmt.executeQuery(sql);
-			
 			// 6. 실행 결과 출력하기
 			while(rs.next()) 
 			{
