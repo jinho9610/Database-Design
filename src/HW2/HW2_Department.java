@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
@@ -69,8 +70,8 @@ public class HW2_Department extends HttpServlet implements Servlet {
 				out.println("<h1>" + delCount + " row(s) is(are) deleted</h1>");
 			}
 		}
-		
-		if (param_count == 4) {
+
+		else if (param_count == 4) {
 			String dname = request.getParameter(params.get(0));
 			int dnumber = Integer.parseInt(request.getParameter(params.get(1)));
 			String mgr_ssn = request.getParameter(params.get(2));
@@ -86,6 +87,19 @@ public class HW2_Department extends HttpServlet implements Servlet {
 				out.println("<h1>" + updateCount + " row(s) is(are) updated</h1>");
 			}
 		}
+
+		else { // 전체 조회 즉, inquiry의 경우
+			if (params.get(param_count).equals("inquiry")) {
+				List<Department> departmentList = dao.getDepartments();
+				for (Department department_tmp : departmentList) {
+					out.println("<h1>My name is " + department_tmp.getDname() + "<br>");
+					out.println("My number is " + department_tmp.getDnumber() + "<br>");
+					out.println("My mgr_ssn is " + department_tmp.getMgr_ssn() + "<br>");
+					out.println("My mgr_start_date is " + department_tmp.getMgr_start_date() + "</h1><br>");
+				}
+			}
+		}
+		out.close();
 	}
 
 	/**
